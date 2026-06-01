@@ -726,10 +726,12 @@ const htmlContent = `
                     <div class="header-title-area">
                         <span class="header-title">Configuração</span>
                     </div>
-                    <button class="top-action-btn" onclick="switchView('dashboard')">📊 Abrir Dashboard de DevOps</button>
                 </header>
                 <div class="panel-body">
                     <div class="view-section-inner" style="display: flex; flex-direction: column; gap: 24px;">
+                        <div style="display: flex; justify-content: flex-end; width: 100%;">
+                            <button class="top-action-btn" onclick="switchView('dashboard')">📊 Abrir Dashboard de DevOps</button>
+                        </div>
                         <h2 class="page-title">⚙️ Configurações do Agente & DevOps</h2>
                         
                         <div class="config-card">
