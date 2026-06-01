@@ -50,9 +50,34 @@ else
     echo -e "${GREEN}✅  O cluster K3d '${CLUSTER_NAME}' já está parado ou não existe.${RESET}"
 fi
 
+# 4. Checagem Extra: Status Real dos Containers Docker
+echo ""
+echo -e "${CYAN}🔍  Checagem Extra: Status Real dos Containers Docker...${RESET}"
+DOCKER_CONTAINERS=$(docker ps -a --filter name="k3d-$CLUSTER_NAME-" --format "{{.Names}}::{{.Status}}")
+
+if [ -n "$DOCKER_CONTAINERS" ]; then
+    printf "   ${BOLD}%-35s %s${RESET}\n" "CONTAINER DOCKER" "STATUS REAL"
+    echo -e "   ------------------------------------------------------------"
+    echo "$DOCKER_CONTAINERS" | while read -r line; do
+        name=$(echo "$line" | cut -d':' -f1)
+        status=$(echo "$line" | cut -d':' -f3-)
+        
+        if [[ "$status" =~ "Exited" ]]; then
+            printf "   %-35s ${RED}⏹️  %s${RESET}\n" "$name" "$status"
+        elif [[ "$status" =~ "Up" ]]; then
+            printf "   %-35s ${GREEN}▶️  %s${RESET}\n" "$name" "$status"
+        else
+            printf "   %-35s ${YELLOW}⏳  %s${RESET}\n" "$name" "$status"
+        fi
+    done
+else
+    echo -e "   ${YELLOW}Nenhum container Docker associado ao '${CLUSTER_NAME}' encontrado.${RESET}"
+fi
+
 echo ""
 echo -e "${PURPLE}${BOLD}===================================================================${RESET}"
 echo -e "${GREEN}${BOLD}             🎉 INFRAESTRUTURA DESATIVADA COM SUCESSO!            ${RESET}"
 echo -e "${PURPLE}${BOLD}===================================================================${RESET}"
 echo -e "   Até logo, David! Toda a sua pilha DevOps está devidamente pausada."
 echo -e "${PURPLE}${BOLD}===================================================================${RESET}"
+
