@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: ghcr.io/dolfino/hermes-app:eb49660151c25fe4da503a85bd1d8604460a94bd
+          image: ghcr.io/dolfino/hermes-app:762fd3e507668e65a309e9029f880e3af8fed8a5
           ports:
             - containerPort: 3000
               name: http
