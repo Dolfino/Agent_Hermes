@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     # URL do seu repositório criado no GitHub (Substitua pelos seus dados!)
-    repoURL: 'https://github.com/[SEU_USUARIO_GITHUB]/[SEU_REPOSITORIO].git'
+    repoURL: 'https://github.com/Dolfino/Agent_Hermes.git'
     targetRevision: HEAD
     path: k8s
   destination:
