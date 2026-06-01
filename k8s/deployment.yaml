@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hermes-app
+  namespace: hermes
+  labels:
+    app.kubernetes.io/name: hermes-app
+    app.kubernetes.io/part-of: hermes
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hermes-app
+  template:
+    metadata:
+      labels:
+        app: hermes-app
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/[SEU_USUARIO_GITHUB]/hermes-app:latest
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: 256Mi
+            requests:
+              cpu: "100m"
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5

@@ -1,0 +1,11 @@
+{
+  "name": "hermes-app",
+  "version": "1.0.0",
+  "description": "Hermes GitOps Demo Application",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "SRE Bot",
+  "license": "MIT"
+}

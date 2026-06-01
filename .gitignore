@@ -1,0 +1,5 @@
+bin/
+scratch/
+.env
+node_modules/
+dist/
